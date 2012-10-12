@@ -1,0 +1,8 @@
+name    'mthibaut-mutual_trust'
+version '1.0.0'
+source 'UNKNOWN'
+author 'mthibaut'
+license 'Apache License, Version 2.0'
+summary 'UNKNOWN'
+description 'UNKNOWN'
+project_page 'UNKNOWN'

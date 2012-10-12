@@ -1,0 +1,24 @@
+mutual_trust
+
+Provides a defined type named "mutual_trust::ssh" which enables mutual
+trust between users on different systems.
+
+All uses of mutual_trust::ssh with the same tag will result in trust to every
+other usage of mutual_trust::ssh with that same tag!
+
+See the manifests/init.pp file for usage and examples.
+
+License
+-------
+
+Apache License, Version 2.0
+
+Contact
+-------
+
+Maarten Thibaut <mthibaut@cisco.com>
+
+Support
+-------
+
+Please log tickets and issues at our [Projects site](http://projects.example.com)
