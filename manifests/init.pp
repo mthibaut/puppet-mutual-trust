@@ -62,28 +62,35 @@ class mutual_trust {
 define ssh(
 	$tag     = $name,
 	$user    = "root",
-	$homedir = $user ? {
-			/^root$/ => operatingystem ? {
-				"Solaris"	=> "/",
-				default		=> "/root",
-			},
-			default  => "/home/$user",
-		},
-	$sshdir  = "$homedir/.ssh"
+	$homedir = undef,
+	$sshdir  = undef
 ) {
+	$defaulthome = $user ? {
+		/^root$/ => $kernel ? {
+			"Solaris"	=> "/",
+			default		=> "/root",
+		},
+		default  => "/home/$user",
+	}
 
-	
-
-	file { "$sshdir":
-		path => "$sshdir",
+	$myhome = $homedir ? {
+		/.+/    => $homedir,
+		default => $defaulthome
+	}
+	$myssh = $sshdir ? {
+		/.+/    => $sshdir,
+		default => "$myhome/.ssh",
+	}
+			
+	file { "$myssh":
 		ensure => directory;
 	}
 
 	exec { "create_sshkey":
-		command => "ssh-keygen -q -N '' -t rsa -f $sshdir/id_rsa",
+		command => "ssh-keygen -q -N '' -t rsa -f $myssh/id_rsa",
 		path    => "/usr/bin:/bin",
-		creates => "$sshdir/id_rsa.pub",
-		require => File["$sshdir"],
+		creates => "$myssh/id_rsa.pub",
+		require => File["$myssh"],
 	}
 
 	if $rootdsakey {

@@ -1,5 +1,5 @@
 name    'mthibaut-mutual_trust'
-version '1.0.0'
+version '1.0.1'
 source 'UNKNOWN'
 author 'mthibaut'
 license 'Apache License, Version 2.0'
